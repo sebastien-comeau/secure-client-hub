@@ -1,27 +1,17 @@
 import Markdown from 'markdown-to-jsx'
-import ContactProvinceRow from './ContactProvinceRow'
+import {
+  ContactProvinceRow,
+  ContactProvinceRowProps,
+} from './ContactProvinceRow'
 
-interface Item {
-  content: string
-  recipient: string
-  program: string
-  poBox: string
-  station: string
-  city: string
-  province: string
-  postal: string
-  country: string
-}
-
-interface ContactProvinceProps {
+export interface ContactProvinceProps {
   title: string
   intro: string
   id: string
-  i: number
-  details: { label: string; id: string; items: Item[] }[]
+  details: ContactProvinceRowProps[]
 }
 
-const ContactProvince = ({
+export const ContactProvince = ({
   title,
   intro,
   id,
@@ -37,14 +27,17 @@ const ContactProvince = ({
       </div>
       {/* Ensure provinces are sorted alphabetically regardless of language */}
       {details
-        .sort(function (a, b) {
+        .toSorted(function (a, b) {
           return a.label.toLowerCase().localeCompare(b.label.toLowerCase())
         })
-        .map((item, i) => (
-          <ContactProvinceRow {...item} key={i} />
+        .map((item) => (
+          <ContactProvinceRow
+            key={item.id}
+            id={item.id}
+            items={item.items}
+            label={item.label}
+          />
         ))}
     </div>
   )
 }
-
-export default ContactProvince
