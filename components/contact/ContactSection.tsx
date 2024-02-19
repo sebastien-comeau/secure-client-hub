@@ -49,19 +49,19 @@ export const ContactSection = ({
       </div>
       <dl className=" border-y-2 divide-y-2 " data-cy="section2">
         {details.map((x) => {
-          const button = x.items[0].button && x.items[0].button.length > 0
+          const button = x.items[0]?.button && x.items[0].button.length > 0
           return (
             <ContactSectionRow
               key={x.id}
               id={x.id}
               title={x.title}
               items={x.items}
-              detail={x.items[0].content}
-              buttonId={x.items[0].id}
-              iconFeature={x.items[0].icon}
+              detail={x.items[0]?.content}
+              buttonId={x.items[0]?.id}
+              iconFeature={x.items[0]?.icon}
               highlight={x.color}
               button={button}
-              buttonURL={x.items[0].link}
+              buttonURL={x.items[0]?.link}
               refPageAA={`Contact ${programs(id.split('-')[0])}`}
             />
           )
